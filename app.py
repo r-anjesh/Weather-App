@@ -1,28 +1,28 @@
 import streamlit as st
 import requests
 
-# OpenWeatherMap API Key
-API_KEY = '8478264ca5909e799f926ce0a2afa969'  # Replace with your actual API key
 
-# Function to fetch current weather data from OpenWeatherMap API
+API_KEY = '8478264ca5909e799f926ce0a2afa969'  
+
+
 def get_weather(city_name):
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = f"{base_url}q={city_name}&appid={API_KEY}&units=metric"
     response = requests.get(complete_url)
     return response.json()
 
-# Function to fetch 5-day weather forecast data
+
 def get_forecast(city_name):
     base_url = "http://api.openweathermap.org/data/2.5/forecast?"
     complete_url = f"{base_url}q={city_name}&appid={API_KEY}&units=metric"
     response = requests.get(complete_url)
     return response.json()
 
-# Streamlit app
+
 def app():
     st.title("Weather Dashboard")
     
-    # User input for city
+    
     city = st.text_input("Enter city name:")
     
     if city:
@@ -36,7 +36,7 @@ def app():
             st.write(f"**Humidity**: {weather_data['main']['humidity']}%")
             st.write(f"**Wind Speed**: {weather_data['wind']['speed']} m/s")
             
-            # Fetch and display 5-day forecast
+            
             forecast_data = get_forecast(city)
             st.subheader("5-Day Forecast")
             
